@@ -1,25 +1,45 @@
 import React, { Component } from 'react';
 import './App.css';
-// import {fetchMoviesList} from './fetch';
+import {fetchMoviesList} from './fetch';
+import {ApiConfig} from './fetch';
 
 class App extends Component {
   // fetchResponse = "foo";
   state = {
     suggestionsList: [],
+    userInput: 'bean'
   }
 
-  componentDidMount() {
-    // fetchMoviesList('face');
-    fetch("https://api.themoviedb.org/3/search/movie?api_key=11fdff0a50cf7d845a2c73890befb6b2&query=face")
-      .then(response => response.json())
-      .then(data => this.setState({ suggestionsList: data.results }));   
+  inputChangedHandler = ( event ) => {
+    this.setState( { userInput: event.target.value } );
   }  
 
+  componentDidMount() {
+    let keyWord = this.state.userInput;
+    fetch(`${ApiConfig.BASE_URL}/search/movie?api_key=${ApiConfig.KEY}&query=${keyWord}`)
+      .then(response => response.json())
+      .then(data => this.setState({ suggestionsList: data.results }));   
+  } 
+
+  componentDidUpdate() { 
+    let keyWord = this.state.userInput;
+    fetch(`${ApiConfig.BASE_URL}/search/movie?api_key=${ApiConfig.KEY}&query=${keyWord}`)
+      .then(response => response.json())
+      .then(data => this.setState({ suggestionsList: data.results })); 
+  }
+
   render () {
-    console.log(this.state.suggestionsList);
     return (
       <div className="App">
-      {this.state.suggestionsList.map(movie => <div>{movie.original_title}</div>)}
+        <div className="movie-search">
+          <input
+            type="text"
+            onChange={this.inputChangedHandler}
+            value={this.state.userInput} />        
+        </div>
+        <div className="movie-container">
+            {this.state.suggestionsList.map(movie => <div>{movie.original_title}</div>)}
+        </div>
       </div>
     );
   }

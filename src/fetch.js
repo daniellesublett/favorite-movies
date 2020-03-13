@@ -1,6 +1,5 @@
 
-
-const ApiConfig = {
+export const ApiConfig = {
     KEY: "11fdff0a50cf7d845a2c73890befb6b2&query=",
     BASE_URL: "https://api.themoviedb.org/3"
 };
