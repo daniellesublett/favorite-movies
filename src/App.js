@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import {fetchTrending} from './fetch';
 import {fetchMoviesList} from './fetch';
 import {fetchMovie} from './fetch';
 
 class App extends Component {
   // fetchResponse = "foo";
   state = {
+    trendingList:[],
     suggestionsList: [],
-    userInput: 'bean',
+    userInput: 'search for movie',
     selectedMovie: {}
 
   }
@@ -17,15 +19,34 @@ class App extends Component {
   }  
 
   componentDidMount() {
-    let keyWord = this.state.userInput;
-    fetchMoviesList(keyWord).then(data => this.setState({ suggestionsList: data.results }));   
+    fetchTrending().then(data => this.setState({ trendingList: data.results }));   
   } 
 
   componentDidUpdate(_, prevState) {
     if (prevState.userInput !== this.state.userInput){
       let keyWord = this.state.userInput;
       fetchMoviesList(keyWord).then(data => this.setState({ suggestionsList: data.results || []}));       
+    } 
+  }
+
+  showPoster(){
+    let image;
+    if(this.state.selectedMovie.poster_path == null){
+      image = "https://portal.lancercorp.com/Content/Images/missing.png";
+    } else {
+      image = "https://image.tmdb.org/t/p/w500/" + this.state.selectedMovie.poster_path;
     }
+    return image;
+  }
+
+  showRelevantList(){
+    let movieList;
+    if(this.state.userInput == "search for movie"){
+      movieList = this.state.trendingList.map(movie => <li onClick={() => this.getMovie(movie.id)}>{movie.original_title}</li>);
+    } else {
+      movieList = this.state.suggestionsList.map(movie => <li onClick={() => this.getMovie(movie.id)}>{movie.original_title}</li>);
+    }
+    return movieList;
   }
 
   async getMovie(id) {
@@ -39,10 +60,6 @@ class App extends Component {
       }
   }  
 
-  // getMovie(id){
-  //   fetchMovie(id).then(data => this.setState({ selectedMovie: data.results }));
-  //   console.log(fetchMovie(id)); 
-  // }
 
   render () {
     return (
@@ -55,12 +72,12 @@ class App extends Component {
         </div>
         <div className="movie-container">
             <ul>  
-              {this.state.suggestionsList.map(movie => <li onClick={() => this.getMovie(movie.id)}>{movie.original_title}</li>)}
+              {this.showRelevantList()}
             </ul>
         </div>
         <div className="movie-card">
             <h3 className="movieName">{this.state.selectedMovie.original_title}</h3>
-            <img src= {"https://image.tmdb.org/t/p/w500/" + this.state.selectedMovie.poster_path}/>
+            <img src= {this.showPoster()}/>
         </div>
       </div>
     );
