@@ -5,10 +5,8 @@ export const ApiConfig = {
 };
 
 export function fetchMoviesList(keyWord) {
-    // return fetch(`${ApiConfig.BASE_URL}/search/movie?api_key=${ApiConfig.KEY}&query=${keyWord}`)
     return fetch(`${ApiConfig.BASE_URL}/search/movie?api_key=${ApiConfig.KEY}&query=${keyWord}`)
-      .then(response => response.json())
-      // .then(data => this.setState({ suggestionsList: data.results })); 
+      .then(response => response.json()) 
 }
 
 export function fetchMovie(id) {
