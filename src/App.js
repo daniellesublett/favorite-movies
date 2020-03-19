@@ -3,9 +3,11 @@ import './App.css';
 import {fetchTrending} from './fetch';
 import {fetchMoviesList} from './fetch';
 import {fetchMovie} from './fetch';
+import MovieList from './MovieList/MovieList';
+import MovieSearch from './MovieSearch/MovieSearch';
+import MovieCard from './MovieCard/MovieCard';
 
 class App extends Component {
-  // fetchResponse = "foo";
   state = {
     trendingList:[],
     suggestionsList: [],
@@ -39,6 +41,16 @@ class App extends Component {
     return image;
   }
 
+  showDescription(){
+    let description;
+    if(this.state.selectedMovie.overview == null){
+      description = "No Description Available";
+    } else {
+      description = this.state.selectedMovie.overview;
+    }
+    return description;
+  }  
+
   showRelevantList(){
     let movieList;
     if(this.state.userInput == "search for movie"){
@@ -64,21 +76,21 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <div className="movie-search">
-          <input
-            type="text"
-            onChange={this.inputChangedHandler}
-            value={this.state.userInput} />        
-        </div>
-        <div className="movie-container">
-            <ul>  
-              {this.showRelevantList()}
-            </ul>
-        </div>
-        <div className="movie-card">
-            <h3 className="movieName">{this.state.selectedMovie.original_title}</h3>
-            <img src= {this.showPoster()}/>
-        </div>
+
+        <MovieSearch
+          type="text"
+          onChange={this.inputChangedHandler}
+          value={this.state.userInput}         
+        />
+
+        <MovieList list={this.showRelevantList()}/>
+
+        <MovieCard 
+          movieName = {this.state.selectedMovie.original_title}
+          description = {this.showDescription()}
+          poster = {this.showPoster()}
+        />
+
       </div>
     );
   }
