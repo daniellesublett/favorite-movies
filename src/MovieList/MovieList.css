@@ -1,0 +1,15 @@
+.movie-container{
+	width: 50%;
+	float: left;
+	display: inline-block;
+}
+
+.movie-container ul {
+	list-style: none;
+	padding: 0px;
+}
+
+.movie-container ul li{
+	cursor: pointer;
+	padding-bottom: 5px;
+}

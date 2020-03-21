@@ -18,3 +18,8 @@ export function fetchMovie(id) {
     return fetch(`${ApiConfig.BASE_URL}/movie/${id}?api_key=${ApiConfig.KEY}&language=en-US`)
         .then(response => response.json())
 }
+
+export function fetchSimilar(id) {
+    return fetch(`${ApiConfig.BASE_URL}/movie/${id}/similar?api_key=${ApiConfig.KEY}&language=en-US`)
+        .then(response => response.json())
+}
