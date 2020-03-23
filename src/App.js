@@ -35,7 +35,7 @@ class App extends Component {
     if (prevState.userInput !== this.state.userInput){
       const { userInput: keyWord, selectedMovie: {id} } = this.state;
       fetchMoviesList(keyWord).then(data => this.setState({ suggestionsList: data.results || []}));
-      this.setState( { listLabel: 'search results' } );
+      this.setState( { listLabel: 'Search Results' } );
       this.getSimilar(id);
 
     } 

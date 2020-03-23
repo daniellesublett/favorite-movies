@@ -1,0 +1,33 @@
+.similar-container{
+	width:30%;
+	display: inline-block;
+	float: right;
+    background: #FFA8A8;
+    background: linear-gradient(to right, #FFA8A8, #ffd8d8);
+    border-radius: 3%;	
+}
+
+.similar-container h3{
+	font-family: Nunito;
+    font-size: 27px;
+}
+
+.similar-container ul{
+	list-style: none;
+	padding: 0px;
+	width: 60%;
+    margin: 0px auto;
+}
+
+.similar-container ul li{
+	cursor: pointer;
+	padding-bottom: 5px;
+	padding-right: 50px;
+	font-family: Nunito;
+	font-weight: bolder;
+}
+
+.similar-container ul li:hover{
+	color: #FF7575;
+	text-decoration: underline;
+}

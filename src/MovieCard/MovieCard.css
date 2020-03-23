@@ -1,6 +1,11 @@
 .movie-card{
-	width: 50%;
+	width: 30%;
 	display: inline-block;
+}
+
+.movieName{
+	font-family: Nunito;
+    font-size: 27px;
 }
 
 

@@ -1,15 +1,37 @@
 .movie-container{
-	width: 50%;
-	float: left;
-	display: inline-block;
+    width: 36%;
+    float: left;
+    display: inline-block;
+    background: #FFA8A8;
+    background: linear-gradient(to right, #FFA8A8, #ffd8d8);
+    border-radius: 3%;
+    padding-top: 20px;
+    padding-bottom: 36px;
+}
+
+.search-results{
+	margin: 0px auto;
+	width:60%;
+	font-family: Nunito;
+    font-size: 40px;
 }
 
 .movie-container ul {
 	list-style: none;
 	padding: 0px;
+	width:60%;
+	margin: 0px auto;
 }
 
 .movie-container ul li{
 	cursor: pointer;
 	padding-bottom: 5px;
+	padding-right: 50px;
+	font-family: Nunito;
+	font-weight: bolder;
+}
+
+.movie-container ul li:hover{
+	color: #FF7575;
+	text-decoration: underline;
 }
