@@ -10,6 +10,10 @@
 .similar-container h3{
 	font-family: Nunito;
     font-size: 27px;
+    width: 60%;
+    margin: 0px auto;
+    padding-top: 20px;
+    padding-bottom: 6px;
 }
 
 .similar-container ul{
